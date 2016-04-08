@@ -1,4 +1,4 @@
-﻿# vso-bower [![Build Status](https://travis-ci.org/touchifyapp/vso-bower.png)](https://travis-ci.org/touchifyapp/vso-bower)
+﻿# bower for vsts [![Build Status](https://travis-ci.org/touchifyapp/vso-bower.svg)](https://travis-ci.org/touchifyapp/vso-bower)
 
 [Bower](http://bower.io) build task for [Visual Studio Team Services](https://www.visualstudio.com/fr-fr/products/visual-studio-team-services-vs.aspx).
 

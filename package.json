@@ -8,7 +8,6 @@
   "private": true,
   "homepage": "https://github.com/touchifyapp/vso-bower",
   "scripts": {
-    "postinstall": "typings install",
     "build": "grunt",
     "test": "grunt"
   },
