@@ -1,0 +1,71 @@
+{
+    "manifestVersion": 1,
+    "id": "vso-bower",
+    "version": "0.1.0",
+    "name": "Bower",
+    "description": "A package manager for the web",
+    "publisher": "Touchify",
+    "public": true,
+    "icons": {
+        "default": "icon.png",
+        "large": "icon-large.png"
+    },
+    "categories": [
+        "Build and release"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "links": {
+        "home": {
+            "uri": "https://github.com/touchifyapp/vso-bower"
+        },
+        "repository": {
+            "uri": "https://github.com/touchifyapp/vso-bower"
+        },
+        "issues": {
+            "uri": "https://github.com/touchifyapp/vso-bower/issues"
+        }
+    },
+    "branding": {
+        "color": "#f39200",
+        "theme": "light"
+    },
+    "tags": [
+        "bower",
+        "package",
+        "manager",
+        "web",
+        "javascript",
+        "css",
+        "dependency",
+        "library"
+    ],
+    "files": [
+        {
+            "path": "bower"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "bower",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "bower"
+            }
+        }
+    ]
+}
