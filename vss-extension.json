@@ -1,11 +1,11 @@
 {
     "manifestVersion": 1,
     "id": "vso-bower",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "name": "Bower",
     "description": "A package manager for the web",
     "publisher": "Touchify",
-    "public": true,
+    "public": false,
     "icons": {
         "default": "icon.png",
         "large": "icon-large.png"

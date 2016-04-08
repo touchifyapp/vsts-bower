@@ -1,6 +1,6 @@
 {
   "name": "vso-bower",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Bower build task for Visual Studio Team Services.",
   "main": "Gruntfile.js",
   "author": "Touchify",
@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "typings install",
     "build": "grunt",
-    "create": "grunt create"
+    "test": "grunt"
   },
   "repository": {
     "type": "git",

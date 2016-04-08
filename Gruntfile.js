@@ -108,6 +108,7 @@ module.exports = function (grunt) {
     
     grunt.registerTask("assets", function () {
         copyFile("bower/task.json");
+        copyFile("node_modules/vsts-task-lib");
         
         copyFile("vss-extension.json");
         copyFile("README.md");
