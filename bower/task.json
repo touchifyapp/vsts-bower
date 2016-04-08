@@ -3,13 +3,13 @@
     "name": "Bower",
     "friendlyName": "Bower",
     "description": "A package manager for the web",
-    "helpMarkDown": "[More Information](http://bower.io)",
+    "helpMarkDown": "[More Information](https://marketplace.visualstudio.com/items?itemName=touchify.vso-bower) [Bower](http://bower.io)",
     "category": "Package",
     "author": "Touchify",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 2
+        "Patch": 3
     },
     "demands": [
         "node.js"
