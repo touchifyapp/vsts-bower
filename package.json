@@ -1,22 +1,22 @@
 {
-  "name": "vso-bower",
+  "name": "vsts-bower",
   "version": "0.1.4",
   "description": "Bower build task for Visual Studio Team Services.",
   "main": "Gruntfile.js",
   "author": "Touchify",
   "license": "MIT",
   "private": true,
-  "homepage": "https://github.com/touchifyapp/vso-bower",
+  "homepage": "https://github.com/touchifyapp/vsts-bower",
   "scripts": {
     "build": "grunt",
     "test": "grunt"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/touchifyapp/vso-bower"
+    "url": "https://github.com/touchifyapp/vsts-bower"
   },
   "bugs": {
-    "url": "https://github.com/touchifyapp/vso-bower/issues"
+    "url": "https://github.com/touchifyapp/vsts-bower/issues"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
