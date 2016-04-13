@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "vsts-bower",
-    "version": "0.1.4",
+    "version": "0.1.0",
     "name": "Bower",
     "description": "A package manager for the web",
     "publisher": "Touchify",
@@ -20,13 +20,13 @@
     ],
     "screenshots": [
         {
-            "path": "screen-add.png"
+            "path": "screenshots/screen-add.png"
         },
         {
-            "path": "screen-simple.png"
+            "path": "screenshots/screen-simple.png"
         },
         {
-            "path": "screen-advanced.png"
+            "path": "screenshots/screen-advanced.png"
         }
     ],
     "content": {

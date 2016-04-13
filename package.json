@@ -1,6 +1,6 @@
 {
   "name": "vsts-bower",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Bower build task for Visual Studio Team Services.",
   "main": "Gruntfile.js",
   "author": "Touchify",

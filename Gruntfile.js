@@ -107,20 +107,41 @@ module.exports = function (grunt) {
     //#region Assets
     
     grunt.registerTask("assets", function () {
-        copyFile("bower/task.json");
-        copyFile("bower/icon.png");
-        copyFile("node_modules/vsts-task-lib", "bower/node_modules/vsts-task-lib");
+        copy("screenshots");
+        copy("node_modules/vsts-task-lib", "bower/node_modules/vsts-task-lib");
         
-        copyFile("vss-extension.json");
-        copyFile("README.md");
-        copyFile("LICENSE");
-        copyFile("icon.png");
-        copyFile("icon-large.png");
+        copy("bower/icon.png");
+        
+        copy("README.md");
+        copy("LICENSE");
+        copy("icon.png");
+        copy("icon-large.png");
     });
     
-    function copyFile(src, dest) {
-        var dest = config.paths.build + "/" + (dest || src);
+    grunt.registerTask("version", function () {
+        var version = config.pkg.version,
+            splitted = version.split(".");
+            
+        var ext = grunt.file.readJSON("vss-extension.json");
+        ext.version = version;
+        writeJSON("vss-extension.json", ext);
+        
+        var task = grunt.file.readJSON("bower/task.json");
+        task.version.Major = parseInt(splitted[0], 10);
+        task.version.Minor = parseInt(splitted[1], 10);
+        task.version.Patch = parseInt(splitted[2], 10);
+        writeJSON("bower/task.json", task);
+    });
+    
+    function copy(src, dest) {
+        dest = config.paths.build + "/" + (dest || src);
         grunt.file.copy(src, dest);
+        grunt.log.ok(dest + " created !");
+    }
+    
+    function writeJSON(dest, obj) {
+        dest = config.paths.build + "/" + dest;
+        grunt.file.write(dest, JSON.stringify(obj, null, 2));
         grunt.log.ok(dest + " created !");
     }
     
@@ -129,7 +150,7 @@ module.exports = function (grunt) {
     
     grunt.initConfig(config);
 
-    grunt.registerTask("build", ["clean:dist", "ts:dist", "eslint:dist", "assets", "vso-create"]);
+    grunt.registerTask("build", ["clean:dist", "ts:dist", "eslint:dist", "assets", "version", "vso-create"]);
     grunt.registerTask("publish", ["build", "buildcontrol:dist", "vso-publish"]);
 
     grunt.registerTask("default", ["build"]);
