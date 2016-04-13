@@ -3,7 +3,7 @@
     "name": "Bower",
     "friendlyName": "Bower",
     "description": "A package manager for the web",
-    "helpMarkDown": "[More Information](https://marketplace.visualstudio.com/items?itemName=touchify.vso-bower) [Bower](http://bower.io)",
+    "helpMarkDown": "[More Information](https://marketplace.visualstudio.com/items?itemName=touchify.vsts-bower) [Bower](http://bower.io)",
     "category": "Package",
     "author": "Touchify",
     "version": {
@@ -38,7 +38,7 @@
             "type": "string",
             "label": "Arguments",
             "defaultValue": "",
-            "helpMarkDown": "Additional arguments passed to bower.  '--config.interactive=false' is not needed.",
+            "helpMarkDown": "Additional arguments passed to Bower.  '--config.interactive=false' is not needed.",
             "groupName": "advanced",
             "required": false
         },
@@ -47,16 +47,16 @@
             "type": "filePath",
             "label": "Bower JSON Path",
             "defaultValue": "bower.json",
-            "helpMarkDown": "Relative path from repo root of the bower JSON configuration file.",
+            "helpMarkDown": "Relative path from repo root to the Bower JSON configuration file.",
             "groupName": "advanced",
             "required": true
         },
         {
             "name": "bowerRuntime",
             "type": "string",
-            "label": "bower CLI location",
+            "label": "Bower CLI location",
             "defaultValue": "node_modules/bower/bin/bower",
-            "helpMarkDown": "Optional.  bower to run.  When agent can't find this bower runtime nor global installed one, it will install bower locally before run (slower).",
+            "helpMarkDown": "Optional.  Bower to run.  When agent can't find this Bower runtime nor global installed one, it will install Bower globally before run (slower).",
             "groupName": "advanced",
             "required": false
         }
