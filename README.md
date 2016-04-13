@@ -1,12 +1,10 @@
-﻿# Bower for vsts [![Build Status](https://travis-ci.org/touchifyapp/vsts-bower.svg)](https://travis-ci.org/touchifyapp/vsts-bower)
+﻿# Bower for Visual Studio Team Services [![Build Status](https://travis-ci.org/touchifyapp/vsts-bower.svg)](https://travis-ci.org/touchifyapp/vsts-bower)
 
 [Bower](http://bower.io) build task for [Visual Studio Team Services](https://www.visualstudio.com/fr-fr/products/visual-studio-team-services-vs.aspx).
 
 ## Installation
 
 Installation can be done using [Visual Studio MarketPlace](https://marketplace.visualstudio.com/items?itemName=touchify.vsts-bower).
-
-[Click here to install](https://marketplace.visualstudio.com/install/touchify.vsts-bower?workflowId=marketplace&wt.mc_id=o~msft~marketplace~install)
 
 ## Usage
 

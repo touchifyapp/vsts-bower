@@ -5,7 +5,7 @@
     "name": "Bower",
     "description": "A package manager for the web",
     "publisher": "Touchify",
-    "public": false,
+    "public": true,
     "icons": {
         "default": "icon.png",
         "large": "icon-large.png"
@@ -50,7 +50,7 @@
     },
     "branding": {
         "color": "#f39200",
-        "theme": "light"
+        "theme": "dark"
     },
     "tags": [
         "bower",
