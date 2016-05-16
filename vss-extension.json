@@ -1,0 +1,85 @@
+{
+  "manifestVersion": 1,
+  "id": "vsts-bower",
+  "version": "0.1.7",
+  "name": "Bower",
+  "description": "A package manager for the web",
+  "publisher": "Touchify",
+  "public": true,
+  "icons": {
+    "default": "icon.png",
+    "large": "icon-large.png"
+  },
+  "categories": [
+    "Build and release"
+  ],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "screenshots/screen-add.png"
+    },
+    {
+      "path": "screenshots/screen-simple.png"
+    },
+    {
+      "path": "screenshots/screen-advanced.png"
+    }
+  ],
+  "content": {
+    "details": {
+      "path": "README.md"
+    },
+    "license": {
+      "path": "LICENSE"
+    }
+  },
+  "links": {
+    "getstarted": {
+      "uri": "https://github.com/touchifyapp/vsts-bower"
+    },
+    "support": {
+      "uri": "https://github.com/touchifyapp/vsts-bower/issues"
+    },
+    "repository": {
+      "uri": "https://github.com/touchifyapp/vsts-bower"
+    },
+    "issues": {
+      "uri": "https://github.com/touchifyapp/vsts-bower/issues"
+    }
+  },
+  "branding": {
+    "color": "#f39200",
+    "theme": "dark"
+  },
+  "tags": [
+    "bower",
+    "package",
+    "manager",
+    "web",
+    "javascript",
+    "css",
+    "dependency",
+    "library"
+  ],
+  "files": [
+    {
+      "path": "bower"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "bower",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "bower"
+      }
+    }
+  ]
+}
