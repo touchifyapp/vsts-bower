@@ -38,8 +38,11 @@
         }
     },
     "links": {
-        "home": {
+        "getstarted": {
             "uri": "https://github.com/touchifyapp/vsts-bower"
+        },
+        "support": {
+            "uri": "https://github.com/touchifyapp/vsts-bower/issues"
         },
         "repository": {
             "uri": "https://github.com/touchifyapp/vsts-bower"

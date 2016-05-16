@@ -6,6 +6,10 @@
 
 Installation can be done using [Visual Studio MarketPlace](https://marketplace.visualstudio.com/items?itemName=touchify.vsts-bower).
 
+## Source Code
+
+Source code can be found on [Github](https://github.com/touchifyapp/vsts-bower).
+
 ## Usage
 
 Add the task to your build configuration:
@@ -24,7 +28,7 @@ _(Optional)_. Set advanced settings.
 
 * __Command__: Command to execute.  _Default:_ `install`.
 * __Arguments__: Additional arguments passed to bower.  `--config.interactive=false` is not needed.
-* __Bower JSON Path__: Relative path to `bower.json` file.  _Default:_ `bower.json`.
+* __Bower JSON Path__: Relative path to `bower.json` file.  _Default:_ `bower.json`. **Also defines the Current Working Directory.**
 * __Bower CLI__: _Optional._  bower runtime to run.  When agent can't find this bower runtime nor global installed one, it will install bower locally before run (slower).  _Default:_ `node_modules/bower/bin/bower`.
 
 ## License

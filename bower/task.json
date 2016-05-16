@@ -34,6 +34,14 @@
             "required": true
         },
         {
+            "name": "bowerjson",
+            "type": "filePath",
+            "label": "Bower JSON Path",
+            "defaultValue": "bower.json",
+            "helpMarkDown": "Relative path from repo root to the Bower JSON configuration file. Also defines the Current Working Directory.",
+            "required": true
+        },
+        {
             "name": "arguments",
             "type": "string",
             "label": "Arguments",
@@ -41,15 +49,6 @@
             "helpMarkDown": "Additional arguments passed to Bower.  '--config.interactive=false' is not needed.",
             "groupName": "advanced",
             "required": false
-        },
-        {
-            "name": "bowerjson",
-            "type": "filePath",
-            "label": "Bower JSON Path",
-            "defaultValue": "bower.json",
-            "helpMarkDown": "Relative path from repo root to the Bower JSON configuration file.",
-            "groupName": "advanced",
-            "required": true
         },
         {
             "name": "bowerRuntime",
