@@ -5,6 +5,7 @@ import { ToolRunner } from "vsts-task-lib/toolrunner";
 tl.setResourcePath(path.join(__dirname, "task.json"));
 
 const 
+    command = tl.getInput("command", true),
     bowerFile = tl.getPathInput("bowerjson", true, true),
     cwd = path.dirname(bowerFile) || ".";
 
@@ -28,13 +29,13 @@ function findBower() {
 	
 	tl.debug("check path : " + bowerRuntime);
 	if(tl.exist(bowerRuntime)) {
-	    const tool = tl.createToolRunner(tl.which("node", true));	
-	    tool.pathArg(bowerRuntime);
+	    const tool = tl.tool(tl.which("node", true));	
+	    tool.arg(bowerRuntime);
         
         return executeBower(tool);
 	}
     else {
-        tl.debug("not found locally installed bower, trying to install bower locally.");
+        tl.debug("not found locally installed bower, trying to install bower globally.");
     
         installBower()
             .then(() => executeBower());
@@ -42,18 +43,22 @@ function findBower() {
 }
 
 function installBower() {
-	const tool = tl.createToolRunner(tl.which("npm", true));
+	const tool = tl.tool(tl.which("npm", true));
     tool.arg("install");
     tool.arg("-g");
     tool.arg("bower");
     
     return tool.exec()
-        .then(() => { bower = tl.which("bower", true); });
+        .then(() => { bower = tl.which("bower", true); })
+        .catch(() => { 
+            tl.setResult(tl.TaskResult.Failed, tl.loc("NpmGlobalNotInPath"));
+            throw new Error("NPM_GLOBAL_PREFIX_NOT_IN_PATH");
+        });
 }
 
 function executeBower(tool?: ToolRunner) {
-    tool = tool || tl.createToolRunner(bower);
-    tool.arg(tl.getInput("command", false));
+    tool = tool || tl.tool(bower);
+    tool.arg(command);
 
     tool.arg("--config.interactive=false");
     tool.arg(tl.getInput("arguments", false));

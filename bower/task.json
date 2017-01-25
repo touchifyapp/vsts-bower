@@ -67,6 +67,7 @@
         }
     },
     "messages": {
+        "NpmGlobalNotInPath": "Your NPM global location is not in PATH, add the result of 'npm prefix -g' to your PATH and try again.",
         "BowerReturnCode": "Bower exited with return code: %d",
         "BowerFailed": "Bower failed with error: %s"
     }
