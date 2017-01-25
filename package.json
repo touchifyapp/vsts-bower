@@ -9,7 +9,7 @@
   "homepage": "https://github.com/touchifyapp/vsts-bower",
   "scripts": {
     "build": "grunt build",
-    "test": "grunt test"
+    "test": "grunt build && grunt test"
   },
   "repository": {
     "type": "git",

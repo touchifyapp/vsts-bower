@@ -191,6 +191,7 @@ module.exports = function (grunt) {
     function packagejson() {
         var pkg = grunt.file.readJSON("package.json");
 
+        pkg.main = "bowertask.js";
         delete pkg.scripts;
         delete pkg.devDependencies;
 

@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - "6"
 before_install:
-  - npm install -g tfx-cli
+  - npm install -g tfx-cli typings
 install:
+  - typings install
   - npm install
