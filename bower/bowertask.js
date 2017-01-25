@@ -2,7 +2,7 @@
 var path = require("path");
 var tl = require("vsts-task-lib/task");
 tl.setResourcePath(path.join(__dirname, "task.json"));
-var bowerFile = tl.getPathInput("bowerjson", true, true), cwd = path.dirname(bowerFile) || ".";
+var command = tl.getInput("command", true), bowerFile = tl.getPathInput("bowerjson", true, true), cwd = path.dirname(bowerFile) || ".";
 tl.cd(cwd);
 var bower = tl.which("bower", false);
 tl.debug("checking path: " + bower);
@@ -18,27 +18,31 @@ function findBower() {
     bowerRuntime = path.resolve(cwd, bowerRuntime);
     tl.debug("check path : " + bowerRuntime);
     if (tl.exist(bowerRuntime)) {
-        var tool = tl.createToolRunner(tl.which("node", true));
-        tool.pathArg(bowerRuntime);
+        var tool = tl.tool(tl.which("node", true));
+        tool.arg(bowerRuntime);
         return executeBower(tool);
     }
     else {
-        tl.debug("not found locally installed bower, trying to install bower locally.");
+        tl.debug("not found locally installed bower, trying to install bower globally.");
         installBower()
             .then(function () { return executeBower(); });
     }
 }
 function installBower() {
-    var tool = tl.createToolRunner(tl.which("npm", true));
+    var tool = tl.tool(tl.which("npm", true));
     tool.arg("install");
     tool.arg("-g");
     tool.arg("bower");
     return tool.exec()
-        .then(function () { bower = tl.which("bower", true); });
+        .then(function () { bower = tl.which("bower", true); })
+        .catch(function () {
+        tl.setResult(tl.TaskResult.Failed, tl.loc("NpmGlobalNotInPath"));
+        throw new Error("NPM_GLOBAL_PREFIX_NOT_IN_PATH");
+    });
 }
 function executeBower(tool) {
-    tool = tool || tl.createToolRunner(bower);
-    tool.arg(tl.getInput("command", false));
+    tool = tool || tl.tool(bower);
+    tool.arg(command);
     tool.arg("--config.interactive=false");
     tool.arg(tl.getInput("arguments", false));
     return tool.exec()

@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "vsts-bower",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "name": "Bower",
   "description": "A package manager for the web",
   "publisher": "Touchify",
