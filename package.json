@@ -8,8 +8,8 @@
   "private": true,
   "homepage": "https://github.com/touchifyapp/vsts-bower",
   "scripts": {
-    "build": "grunt",
-    "test": "grunt"
+    "build": "grunt build",
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
