@@ -8,7 +8,14 @@ Installation can be done using [Visual Studio MarketPlace](https://marketplace.v
 
 #### Note
 
-If you have some trouble with bower installation and detection on your own agent. A simple workaround is to add `bower` as a dependency in your project's `package.json`. The `vsts-bower` task will then find and use your local version of `bower` (see #1).
+If you have some trouble with bower installation and detection on your own agent. A simple workaround is to add `bower` as a dependency in your project's `package.json`. The `vsts-bower` task will then find and use your local version of `bower`.
+
+If you encounter some trouble with `NetworkService` account. Add the path from `npm prefix -g` to the global path and launch the task again.
+```cmd
+C:\>npm prefix -g
+C:\Windows\ServiceProfiles\NetworkService\AppData\Roaming\npm
+```
+_(see issue [#1](https://github.com/touchifyapp/vsts-bower/issues/1))._
 
 ## Source Code
 
