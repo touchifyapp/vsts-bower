@@ -1,0 +1,11 @@
+{
+	"name": "vsts-bower",
+	"dependencies": {},
+	"globalDependencies": {
+		"node": "registry:dt/node#6.0.0+20160709114037",
+		"q": "registry:dt/q#0.0.0+20160613154756"
+	},
+	"globalDevDependencies": {
+		"mocha": "registry:env/mocha#2.2.5+20160926180742"
+	}
+}
