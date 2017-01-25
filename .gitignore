@@ -20,6 +20,7 @@
 [Bb]uild/
 [Bb]in/
 [Oo]bj/
+[Tt]emp/
 x64/
 .tscache/
 .baseDir.*

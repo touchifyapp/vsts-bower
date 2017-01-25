@@ -4,10 +4,12 @@
     "sourceType": "module"
   },
   "env": {
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "extends": "eslint:recommended",
   "rules": {
+    "no-console": 0
   },
   "globals": {
   }

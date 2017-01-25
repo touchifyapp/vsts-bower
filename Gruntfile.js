@@ -12,7 +12,8 @@ module.exports = function (grunt) {
         paths: {
             src: "bower",
             build: "dist",
-            temp: ".temp"
+            tests: "tests",
+            temp: "temp"
         }
     };
     
@@ -30,19 +31,38 @@ module.exports = function (grunt) {
             fast: "never"
         },
         dist: {
-            src: ["_references.d.ts", "<%= paths.src %>/**/*.ts"],
+            src: ["typings/index.d.ts", "<%= paths.src %>/**/*.ts"],
             dest: "<%= paths.build %>/<%= paths.src %>"
+        },
+        test: {
+            src: ["typings/index.d.ts", "<%= paths.src %>/**/*.ts", "<%= paths.tests %>/**/*.ts"],
+            dest: "<%= paths.temp %>"
         }
     };
     
+    //#endregion
+
+    //#region Tests
+
     config.eslint = {
         options: {
             configFile: "eslint.json",
         },
 
-        dist: ["<%= paths.build %>/**/*.js"]
+        dist: ["<%= paths.build %>/**/*.js"],
+        test: ["<%= paths.temp %>/**/*.js"]
     };
     
+    config.mochaTest = {
+        options: {
+            reporter: "spec"
+        },
+
+        test: {
+            src: ["<%= paths.temp %>/<%= paths.tests %>/index.js"]
+        }
+    };
+
     //#endregion
 
     //#region Clean
@@ -107,8 +127,8 @@ module.exports = function (grunt) {
     //#region Assets
     
     grunt.registerTask("assets", function () {
+        packagejson();
         copy("screenshots");
-        copy("node_modules/vsts-task-lib", "bower/node_modules/vsts-task-lib");
         
         copy("bower/icon.png");
         
@@ -132,11 +152,49 @@ module.exports = function (grunt) {
         task.version.Patch = parseInt(splitted[2], 10);
         writeJSON("bower/task.json", task);
     });
-    
+
+    grunt.registerTask("npminstall", function () {
+        var done = this.async();
+        
+        grunt.util.spawn(
+            {
+                cmd: "npm",
+                args: ["install"],
+                opts: {
+                    cwd: config.paths.build + "/bower"
+                }
+            }, 
+            function(err, result, code) {
+                if (err) {
+                    grunt.log.error();
+                    grunt.fail.warn(err, code);
+                }
+                
+                if (code !== 0) {
+                    grunt.fail.warn(result.stderr || result.stdout, code);
+                }
+                
+                grunt.verbose.writeln(result.stdout);
+                grunt.log.ok("NPM dependencies successfully installed in task bower !");
+                
+                done();
+            }
+        );
+    });
+
     function copy(src, dest) {
         dest = config.paths.build + "/" + (dest || src);
         grunt.file.copy(src, dest);
         grunt.log.ok(dest + " created !");
+    }
+
+    function packagejson() {
+        var pkg = grunt.file.readJSON("package.json");
+
+        delete pkg.scripts;
+        delete pkg.devDependencies;
+
+        writeJSON("bower/package.json", pkg);
     }
     
     function writeJSON(dest, obj) {
@@ -150,7 +208,9 @@ module.exports = function (grunt) {
     
     grunt.initConfig(config);
 
-    grunt.registerTask("build", ["clean:dist", "ts:dist", "eslint:dist", "assets", "version", "vso-create"]);
+    grunt.registerTask("test", ["clean:temp", "ts:test", "eslint:test", "mochaTest:test"]);
+
+    grunt.registerTask("build", ["clean:dist", "ts:dist", "eslint:dist", "assets", "npminstall", "version", "vso-create"]);
     grunt.registerTask("publish", ["build", "buildcontrol:dist", "vso-publish"]);
 
     grunt.registerTask("default", ["build"]);
