@@ -22,7 +22,6 @@
     "vsts-task-lib": "^1.1.0"
   },
   "devDependencies": {
-    "bower": "^1.8.0",
     "grunt": "^1.0.1",
     "grunt-build-control": "^0.7.0",
     "grunt-contrib-clean": "^1.0.0",
