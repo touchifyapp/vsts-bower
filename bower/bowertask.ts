@@ -11,17 +11,16 @@ const
 
 tl.cd(cwd);
 
-let bower = tl.which("bower", false);
+let bower = findGlobalBower();
 
-tl.debug(`checking path: ${bower}`);
-if(!tl.exist(bower)) {
-	findBower();
-}
-else {
+if(bower) {
 	executeBower();
 }
+else {
+	findBower();
+}
 
-function findBower() {
+function findBower(): Promise<void> {
     tl.debug("not found global installed bower, try to find bower locally.");	
 	
 	let bowerRuntime = tl.getInput("bowerRuntime", true);
@@ -37,26 +36,27 @@ function findBower() {
     else {
         tl.debug("not found locally installed bower, trying to install bower globally.");
     
-        installBower()
+        return installBower()
             .then(() => executeBower());
     }
 }
 
-function installBower() {
+function installBower(): Promise<void> {
 	const tool = tl.tool(tl.which("npm", true));
     tool.arg("install");
     tool.arg("-g");
     tool.arg("bower");
     
-    return tool.exec()
-        .then(() => { bower = tl.which("bower", true); })
-        .catch(() => { 
+    return tool.exec().then(() => { 
+        bower = findGlobalBower();
+        if (!bower) {
             tl.setResult(tl.TaskResult.Failed, tl.loc("NpmGlobalNotInPath"));
             throw new Error("NPM_GLOBAL_PREFIX_NOT_IN_PATH");
-        });
+        }
+    });
 }
 
-function executeBower(tool?: ToolRunner) {
+function executeBower(tool?: ToolRunner): Promise<void> {
     tool = tool || tl.tool(bower);
     tool.arg(command);
 
@@ -68,7 +68,39 @@ function executeBower(tool?: ToolRunner) {
             tl.setResult(tl.TaskResult.Succeeded, tl.loc("BowerReturnCode", code));
         })
         .catch((err) => {
-            tl.debug("taskRunner fail");
+            tl.debug("Bower execution failed");
             tl.setResult(tl.TaskResult.Failed, tl.loc("BowerFailed", err.message));
         });
+}
+
+function findGlobalBower(): string {
+    let bowerPath = tl.which("bower", false);
+
+    tl.debug(`checking path: ${bowerPath}`);
+    if (tl.exist(bowerPath)) {
+        return bowerPath;
+    }
+
+    const
+        globalPrefix = getNPMPrefix(),
+        isWin = process.platform.indexOf("win") === 0;
+
+    bowerPath = path.join(globalPrefix, "bower" + (isWin ? ".cmd" : ""));
+
+    tl.debug(`checking path: ${bowerPath}`);
+    if (tl.exist(bowerPath)) {
+        return bowerPath;
+    }
+}
+
+function getNPMPrefix(): string {
+    if (getNPMPrefix["value"]) {
+        return getNPMPrefix["value"];
+    }
+
+	const tool = tl.tool(tl.which("npm", true));
+    tool.arg("prefix");
+    tool.arg("-g");
+
+    return (getNPMPrefix["value"] = tool.execSync().stdout.trim());
 }
