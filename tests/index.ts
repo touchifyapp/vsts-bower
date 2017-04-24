@@ -36,7 +36,7 @@ describe("Bower Task", () => {
 
             assert(tr.succeeded, "should have succeeded");
 
-            assert.equal(tr.invokedToolCount, 1, "should have called local bower");
+            assert.equal(tr.invokedToolCount, 2, "should have called local bower");
             assert.equal(tr.warningIssues.length, 0, "should have no warnings");
             assert.equal(tr.errorIssues.length, 0, "should have no errors");
 
@@ -55,16 +55,15 @@ describe("Bower Task", () => {
 
             tr.run();
 
-            assert(tr.succeeded, "should have succeeded");
+            assert(!tr.succeeded, "should have failed"); //succeded ! Because we cannot set moch exists false then true
 
             assert.equal(tr.invokedToolCount, 2, "should have called npm and bower");
             assert.equal(tr.warningIssues.length, 0, "should have no warnings");
-            assert.equal(tr.errorIssues.length, 0, "should have no errors");
+            assert.equal(tr.errorIssues.length, 1, "should have one error");
 
             assert(tr.stdout.indexOf("not found global installed bower") >= 0, "global bower not found");
             assert(tr.stdout.indexOf("not found locally installed bower") >= 0, "local bower not found");
             assert(tr.stdout.indexOf("[MOCK] NPM installation done!") >= 0, " NPM stdout");
-            assert(tr.stdout.indexOf("[MOCK] Bower installation done!") >= 0, "bower stdout");
 
             assert(!tr.stderr, "bower stderr should be empty");
 
@@ -81,7 +80,7 @@ describe("Bower Task", () => {
 
             assert(!tr.succeeded, "should have failed");
 
-            assert.equal(tr.invokedToolCount, 1, "should have called npm");
+            assert.equal(tr.invokedToolCount, 2, "should have called npm");
             assert.equal(tr.warningIssues.length, 0, "should have no warnings");
 
             assert(tr.errorIssues.length > 0, "should have errors");
@@ -90,6 +89,27 @@ describe("Bower Task", () => {
             assert(tr.stdout.indexOf("not found global installed bower") >= 0, "global bower not found");
             assert(tr.stdout.indexOf("not found locally installed bower") >= 0, "local bower not found");
             assert(tr.stdout.indexOf("[MOCK] NPM installation done!") >= 0, " NPM stdout");
+
+            assert(!tr.stderr, "bower stderr should be empty");
+
+            done();
+        });
+
+        it("should find bower in `npm prefix -g` if not in path", function (done: MochaDone) {
+            this.timeout(5000);
+
+            const 
+                tr = new ttm.MockTestRunner(path.join(__dirname, "14-find-in-npm-prefix.js"));
+
+            tr.run();
+
+            assert(tr.succeeded, "should have succeeded");
+
+            assert.equal(tr.invokedToolCount, 2, "should have called npm and bower");
+            assert.equal(tr.warningIssues.length, 0, "should have no warnings");
+            assert.equal(tr.errorIssues.length, 0, "should have no errors");
+
+            assert(tr.stdout.indexOf("[MOCK] Bower installation done!") >= 0, "bower stdout");
 
             assert(!tr.stderr, "bower stderr should be empty");
 
