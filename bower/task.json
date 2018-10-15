@@ -8,8 +8,8 @@
   "author": "Touchify",
   "version": {
     "Major": 0,
-    "Minor": 2,
-    "Patch": 0
+    "Minor": 3,
+    "Patch": 1
   },
   "demands": [
     "node.js"

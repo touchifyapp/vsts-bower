@@ -1,6 +1,6 @@
 {
   "name": "vsts-bower",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "Bower build task for Visual Studio Team Services.",
   "main": "bowertask.js",
   "author": "Touchify",
@@ -15,6 +15,6 @@
     "url": "https://github.com/touchifyapp/vsts-bower/issues"
   },
   "dependencies": {
-    "vsts-task-lib": "^1.1.0"
+    "vsts-task-lib": "^2.7.0"
   }
 }

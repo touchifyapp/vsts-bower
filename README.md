@@ -6,7 +6,7 @@
 
 Installation can be done using [Visual Studio MarketPlace](https://marketplace.visualstudio.com/items?itemName=touchify.vsts-bower).
 
-#### Note
+#### Note for installation on your own agent
 
 If you have some trouble with bower installation and detection on your own agent. A simple workaround is to add `bower` as a dependency in your project's `package.json`. The `vsts-bower` task will then find and use your local version of `bower`.
 
