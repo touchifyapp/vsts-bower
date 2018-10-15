@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
     var config = {
         pkg: grunt.file.readJSON("package.json"),
-        
+
         paths: {
             src: "bower",
             build: "dist",
@@ -16,9 +16,9 @@ module.exports = function (grunt) {
             temp: "temp"
         }
     };
-    
+
     //#region Typescript
-    
+
     config.ts = {
         options: {
             target: "es5",
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
             dest: "<%= paths.temp %>"
         }
     };
-    
+
     //#endregion
 
     //#region Tests
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
         dist: ["<%= paths.build %>/**/*.js"],
         test: ["<%= paths.temp %>/**/*.js"]
     };
-    
+
     config.mochaTest = {
         options: {
             reporter: "spec"
@@ -73,9 +73,9 @@ module.exports = function (grunt) {
     };
 
     //#endregion
-    
+
     //#region Publish
-    
+
     config.buildcontrol = {
         options: {
             commit: true,
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
             remote: "<%= pkg.repository.url %>",
             branch: "release"
         },
-        
+
         dist: {
             options: {
                 dir: "<%= paths.build %>",
@@ -92,10 +92,10 @@ module.exports = function (grunt) {
             }
         }
     };
-    
+
     grunt.registerTask("vso-create", function () {
         var done = this.async();
-        
+
         grunt.util.spawn(
             {
                 cmd: "tfx",
@@ -103,49 +103,49 @@ module.exports = function (grunt) {
                 opts: {
                     cwd: config.paths.build
                 }
-            }, 
-            function(err, result, code) {
+            },
+            function (err, result, code) {
                 if (err) {
                     grunt.log.error();
                     grunt.fail.warn(err, code);
                 }
-                
+
                 if (code !== 0) {
                     grunt.fail.warn(result.stderr || result.stdout, code);
                 }
-                
+
                 grunt.verbose.writeln(result.stdout);
                 grunt.log.ok("dist/Touchify.vso-bower-" + config.pkg.version + ".vsix successfully created !");
-                
+
                 done();
             }
         );
     });
-    
+
     //#endregion
-    
+
     //#region Assets
-    
+
     grunt.registerTask("assets", function () {
         packagejson();
         copy("screenshots");
-        
+
         copy("bower/icon.png");
-        
+
         copy("README.md");
         copy("LICENSE");
         copy("icon.png");
         copy("icon-large.png");
     });
-    
+
     grunt.registerTask("version", function () {
         var version = config.pkg.version,
             splitted = version.split(".");
-            
+
         var ext = grunt.file.readJSON("vss-extension.json");
         ext.version = version;
         writeJSON("vss-extension.json", ext);
-        
+
         var task = grunt.file.readJSON("bower/task.json");
         task.version.Major = parseInt(splitted[0], 10);
         task.version.Minor = parseInt(splitted[1], 10);
@@ -155,7 +155,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("npminstall", function () {
         var done = this.async();
-        
+
         grunt.util.spawn(
             {
                 cmd: "npm",
@@ -163,20 +163,20 @@ module.exports = function (grunt) {
                 opts: {
                     cwd: config.paths.build + "/bower"
                 }
-            }, 
-            function(err, result, code) {
+            },
+            function (err, result, code) {
                 if (err) {
                     grunt.log.error();
                     grunt.fail.warn(err, code);
                 }
-                
+
                 if (code !== 0) {
                     grunt.fail.warn(result.stderr || result.stdout, code);
                 }
-                
+
                 grunt.verbose.writeln(result.stdout);
                 grunt.log.ok("NPM dependencies successfully installed in task bower !");
-                
+
                 done();
             }
         );
@@ -197,16 +197,16 @@ module.exports = function (grunt) {
 
         writeJSON("bower/package.json", pkg);
     }
-    
+
     function writeJSON(dest, obj) {
         dest = config.paths.build + "/" + dest;
         grunt.file.write(dest, JSON.stringify(obj, null, 2));
         grunt.log.ok(dest + " created !");
     }
-    
+
     //#endregion
-    
-    
+
+
     grunt.initConfig(config);
 
     grunt.registerTask("test", ["clean:temp", "ts:test", "eslint:test", "mochaTest:test"]);

@@ -19,18 +19,21 @@
     "url": "https://github.com/touchifyapp/vsts-bower/issues"
   },
   "dependencies": {
-    "vsts-task-lib": "^1.1.0"
+    "vsts-task-lib": "^2.7.0"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.11.7",
+    "@types/q": "^1.5.1",
+    "grunt": "^1.0.3",
     "grunt-build-control": "^0.7.1",
-    "grunt-contrib-clean": "^1.1.0",
-    "grunt-eslint": "^19.0.0",
-    "grunt-mocha-test": "^0.13.2",
-    "grunt-ts": "^5.5.1",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-eslint": "^21.0.0",
+    "grunt-mocha-test": "^0.13.3",
+    "grunt-ts": "^6.0.0-beta.21",
     "jit-grunt": "^0.10.0",
-    "mocha": "^3.3.0",
+    "mocha": "^5.2.0",
     "time-grunt": "^1.4.0",
-    "typescript": "^2.2.2"
+    "typescript": "^3.1.3"
   }
 }
